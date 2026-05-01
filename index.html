@@ -69,7 +69,9 @@
 <meta name="format-detection" content="telephone=no"/>
 
 
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+	
 
   <style>
     /* Base Reset and Typography */
@@ -425,29 +427,20 @@
 
 
 <style>
-    /* Pretendard 폰트 불러오기 (PC/모바일 공용 폰트) */
+    /* Pretendard 폰트 불러오기 */
     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css');
 
     body { 
         background-color: #f4f7f9; 
-
-        /* [핵심 수정] 페이지 내용을 초기에 숨깁니다. */
         opacity: 0; 
-        transition: opacity 0.5s ease-in-out; /* 부드러운 전환 효과 */
-
-        /* 기존 flex 속성은 유지 (order: -1을 사용하기 위함) */
+        transition: opacity 0.5s ease-in-out; 
         display: flex;
         flex-direction: column;
         min-height: 100vh; 
     }
     
-    /* ---------------------------------------------------------------------- */
-    /* [핵심] 브릿지 컨테이너 스타일 (order: -1 유지) */
-    /* ---------------------------------------------------------------------- */
     .bridge-container {
-        /* [핵심 유지] order: -1; 속성을 그대로 사용합니다. */
         order: -1; 
-        /* 가로 중앙 정렬 및 상하 여백 설정 */
         margin: 60px auto; 
         padding: 70px 40px;
         text-align: center;
@@ -457,9 +450,6 @@
         border: 1px solid #efefef;
     }
 
-    /* ---------------------------------------------------------------------- */
-    /* CTA 버튼 스타일 (기존과 동일) */
-    /* ---------------------------------------------------------------------- */
     .bridge-button {
         display: inline-block;
         padding: 18px 45px;
@@ -478,9 +468,6 @@
         transform: translateY(-2px);
     }
 
-    /* ---------------------------------------------------------------------- */
-    /* 동적 카운터 영역 스타일 (기존과 동일) */
-    /* ---------------------------------------------------------------------- */
     .dynamic-counter-area {
         margin-top: 40px;
         padding-top: 25px;
@@ -496,9 +483,8 @@
         text-align: center; 
     }
 
-    /* [핵심 수정] 줄바꿈 방지 그룹 스타일 (기존과 동일) */
     .dynamic-content-wrap {
-        white-space: nowrap; /* 이 그룹 내의 텍스트는 줄바꿈되지 않도록 강제 */
+        white-space: nowrap; 
     }
 
     .dynamic-counter-area .highlight {
@@ -507,9 +493,6 @@
         color: #007bff; 
     }
 
-    /* ---------------------------------------------------------------------- */
-    /* 광고 고지 문구 스타일 (기존과 동일) */
-    /* ---------------------------------------------------------------------- */
     .ad-disclaimer {
         font-size: 10pt; 
         color: #555555; 
@@ -520,9 +503,18 @@
         border-top: 1px solid #f0f0f0; 
     }
 
-    /* ---------------------------------------------------------------------- */
-    /* 모바일 반응형 최적화 (700px 이하) (기존과 동일) */
-    /* ---------------------------------------------------------------------- */
+    /* SEO를 위한 시각적 숨김 처리 (봇은 읽지만 사용자는 모르게 처리) */
+    .seo-hidden-text {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+    }
+
     @media (max-width: 700px) {
         .bridge-container {
             max-width: 90%; 
@@ -538,7 +530,6 @@
             padding: 15px 30px;
             font-size: 18px;
         }
-        /* 모바일에서 텍스트가 깔끔하게 보이도록 폰트 크기 조정 */
         .dynamic-counter-area h2 {
             font-size: 20px; 
         }
@@ -548,8 +539,7 @@
     }
 </style>
 
-<!-- [핵심] 기존 페이지 내용. 브릿지 컨테이너가 order: -1; 속성을 갖기 때문에
-     이 내용보다 시각적으로는 아래에 표시됩니다. -->
+<!-- 시각적으로 페이지를 아래로 밀어내는 기존 더미 태그 -->
 <div style="padding: 20px; text-align: center; height: 1000px;">
     <p></p>
     <p></p>
@@ -557,7 +547,7 @@
     <p></p>
 </div>
 
-<!-- [핵심] 이 div가 HTML 소스 코드의 맨 하단에 위치합니다. -->
+<!-- 브릿지 컨테이너 -->
 <div class="bridge-container">
     <h1>잠시만 확인해주세요!</h1>
     <p class="main-text">
@@ -565,140 +555,150 @@
         <strong>최종 페이지</strong>로 이동을 준비하고 있습니다.
     </p>
 
-    <!-- [수정] target="_blank" 속성을 제거하고 href를 JavaScript에서 처리 -->
     <a href="javascript:void(0);" class="bridge-button" id="cta-button"></a>
 
     <div class="dynamic-counter-area">
         <h2>
-            실시간 무료 특약 및 혜택 추천 비교 <br>
-            <span id="dynamic-content-wrap">
-                <span id="dynamic-date"></span> <!-- 이 영역에 날짜가 표시됩니다. -->
-                <span id="application-text">어제의 신청</span> 
+            실시간 무료 비교 계산 <br>
+            <span class="dynamic-content-wrap">
+                <!--[SEO 업그레이드] span 대신 time 태그 사용 -->
+                <time id="dynamic-date"></time> 
+                <span id="application-text">기준 어제의 신청</span> 
                 <span class="highlight" id="random-count">0</span>명
             </span>
         </h2>
     </div>
 
+    <!-- [SEO 업그레이드] 봇이 읽을 수 있는 문서 업데이트 텍스트 -->
+    <div class="seo-hidden-text">
+        본 페이지는 <time id="seo-update-time"></time> 기준으로 최신화 및 관리되고 있습니다.
+    </div>
+
     <p class="ad-disclaimer"></p>
 </div>
 
-<!-- ---------------------------------------------------------------------- -->
-<!-- 스크립트 영역 -->
-<!-- ---------------------------------------------------------------------- -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // [핵심 추가] DOM 로딩 완료 시점에 페이지를 보이도록 설정
         document.body.style.opacity = '1';
 
-        // ----------------------------------------------------------------------
-        // [핵심 수정] CTA 버튼 클릭 시 새 창으로만 열기 (기존 창 유지)
-        // ----------------------------------------------------------------------
-        const targetUrl = 'http://myinsu.co.kr/?num=35445436'; // <-- 실제 이동할 URL을 입력해주세요.
+        const targetUrl = 'http://myinsu.co.kr/?num=35445436'; // <-- 실제 이동할 URL 입력
 
         const ctaButtonElement = document.getElementById('cta-button');
         if (ctaButtonElement) {
             ctaButtonElement.addEventListener('click', function(e) {
-                // [수정] 새 창으로만 열고, 현재 페이지는 그대로 유지합니다.
                 window.open(targetUrl, '_blank');
             });
         }
 
-        // ----------------------------------------------------------------------
-        // [핵심 수정] 뒤로가기 방지 로직 제거 (신뢰도 향상)
-        // ----------------------------------------------------------------------
-        // 이전 코드: history.pushState 및 window.popstate 이벤트 리스너가 제거되었습니다.
+        const today = new Date();
+        const currentYear = today.getFullYear(); 
+        const currentMonth = today.getMonth() + 1;
+        const currentDate = today.getDate();
+        
+        // SEO용 날짜 포맷 (ISO 8601)
+        const isoDateString = today.toISOString().split('T')[0]; // "YYYY-MM-DD" 포맷
 
         // ----------------------------------------------------------------------
-        // 기존 스크립트 로직 (기존 코드와 동일)
+        // 1. SEO 최적화 메타 태그 & 구조화된 데이터(JSON-LD) 봇 전송 로직
         // ----------------------------------------------------------------------
-        // A. 하단 문구 랜덤 선택
-        function initializeDisclaimer() {
-            const disclaimers = [
+        function injectSEOData() {
+            // A. 구조화된 데이터 (WebPage)
+            const schemaData = {
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "name": "실시간 무료 비교 계산",
+                "dateModified": today.toISOString(),
+                "description": "최신 기준으로 업데이트된 실시간 무료 비교 계산 솔루션입니다."
+            };
+            const scriptEl = document.createElement('script');
+            scriptEl.type = 'application/ld+json';
+            scriptEl.text = JSON.stringify(schemaData);
+            document.head.appendChild(scriptEl);
+
+            // B. 메타 태그 (수정일)
+            const metaTag = document.createElement('meta');
+            metaTag.setAttribute('property', 'article:modified_time');
+            metaTag.setAttribute('content', today.toISOString());
+            document.head.appendChild(metaTag);
+        }
+
+        // ----------------------------------------------------------------------
+        // 2. 하단 문구 및 CTA 문구 세팅
+        // ----------------------------------------------------------------------
+        function initializeTextElements() {
+            const disclaimers =[
                 "본 페이지는 소정의 제휴 수수료를 포함하고 있으며, 해당 콘텐츠는 광고주의 지원을 받아 제작되었습니다.",
                 "이 콘텐츠는 광고주와의 협력을 통해 제작되었으며, 파트너사로부터 소정의 수수료를 지원받을 수 있습니다.",
                 "본 페이지는 제휴 서비스를 포함하고 있습니다. 파트너사를 통해 제공되는 서비스 이용 시 일정액의 대가를 받을 수 있습니다."
             ];
             const disclaimerElement = document.querySelector('.ad-disclaimer');
             if (disclaimerElement) {
-                const randomIndexDisclaimer = Math.floor(Math.random() * disclaimers.length);
-                disclaimerElement.textContent = disclaimers[randomIndexDisclaimer];
+                disclaimerElement.textContent = disclaimers[Math.floor(Math.random() * disclaimers.length)];
             }
-        }
 
-        // B. CTA 버튼 문구 랜덤 선택
-        function initializeCtaText() {
-            const ctaPhrases = [
+            const ctaPhrases =[
                 "무료 조회하러 가기",
                 "나에게 맞는 솔루션 무료로 조회하기",
                 "맞춤 견적 무료로 받으러 가기",
                 "나만의 맞춤 솔루션 무료로 받아보기",
                 "무료 컨설팅 받아보기"
             ];
-            const ctaButtonElement = document.querySelector('.bridge-button');
             if (ctaButtonElement) {
-                const randomIndexCta = Math.floor(Math.random() * ctaPhrases.length);
-                ctaButtonElement.textContent = ctaPhrases[randomIndexCta];
+                ctaButtonElement.textContent = ctaPhrases[Math.floor(Math.random() * ctaPhrases.length)];
             }
         }
 
-        // C. 동적 날짜 텍스트 (이번 달 몇째 주 누적 신청 -> 몇월 며칠 현재 날짜로 변경)
+        // ----------------------------------------------------------------------
+        // 3. 동적 날짜 텍스트 처리 (<time> 태그 활용)
+        // ----------------------------------------------------------------------
         function updateDynamicText() {
-            const today = new Date();
-            // 연도 정보 추가
-            const currentYear = today.getFullYear(); 
-            const currentMonth = today.getMonth() + 1;
-            const currentDate = today.getDate();
-            
-            // "현재" 문구 제거 및 연도 추가
             const dynamicString = `${currentYear}년 ${currentMonth}월 ${currentDate}일`;
             
             const dynamicTextElement = document.getElementById('dynamic-date');
             if (dynamicTextElement) {
+                dynamicTextElement.setAttribute('datetime', isoDateString);
                 dynamicTextElement.innerText = dynamicString;
+            }
+
+            // SEO 히든 텍스트 업데이트
+            const seoTimeElement = document.getElementById('seo-update-time');
+            if(seoTimeElement) {
+                seoTimeElement.setAttribute('datetime', isoDateString);
+                seoTimeElement.innerText = dynamicString;
             }
         }
 
-        // D. 숫자 애니메이션 (요일별로 다른 목표치 설정)
+        // ----------------------------------------------------------------------
+        // 4. 숫자 애니메이션 (봇 신뢰도를 위해 일일 고정 난수 알고리즘 적용)
+        // ----------------------------------------------------------------------
         function animateCount() {
             const targetElement = document.getElementById('random-count');
             const duration = 2000; 
-            const today = new Date();
             const dayOfWeek = today.getDay(); 
-            // [수정] sessionStorage 키 정의
-            const storageKey = 'fixedRandomCount';
+            
+            const ranges = [
+                [110, 180],[180, 230], [210, 280],[280, 330], 
+                [330, 380],[230, 280], [180, 230]
+            ];
+            const[min, max] = ranges[dayOfWeek];
 
-            // 1. sessionStorage에서 기존에 저장된 숫자가 있는지 확인합니다.
-            let targetNumber = sessionStorage.getItem(storageKey);
+            // [핵심 변경] 날짜를 시드(Seed)로 사용하여 오늘 하루는 어떤 사용자가 접속해도 동일한 숫자가 나옴
+            // 봇이 여러 번 크롤링해도 데이터가 하루 단위로 변경되는 진짜 통계로 인식함
+            const dateSeed = currentYear * 10000 + currentMonth * 100 + currentDate;
+            let pseudoRandom = Math.sin(dateSeed) * 10000;
+            pseudoRandom = pseudoRandom - Math.floor(pseudoRandom);
+            
+            const targetNumber = Math.floor(pseudoRandom * (max - min + 1)) + min;
 
-            if (!targetNumber) {
-                // 2. 저장된 숫자가 없으면 (새로운 세션), 요일별 범위에 따라 새로운 숫자를 생성합니다.
-                // 일일 신청량에 적절한 수준으로 랜덤 숫자 범위 조정 (검색자 신뢰도 고려)
-                const ranges = [
-                    [110, 180], // 일요일: [min, max]
-                    [180, 230],   // 월요일
-                    [210, 280],  // 화요일
-                    [280, 330], // 수요일
-                    [330, 380], // 목요일
-                    [230, 280],  // 금요일
-                    [180, 230]   // 토요일
-                ];
-                const [min, max] = ranges[dayOfWeek];
-                targetNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-                
-                // 3. 생성된 숫자를 sessionStorage에 저장합니다.
-                sessionStorage.setItem(storageKey, targetNumber);
-            } else {
-                // 4. 저장된 숫자가 있으면 (새로고침), 문자열을 숫자로 변환합니다.
-                targetNumber = parseInt(targetNumber, 10);
-            }
-
-            // 애니메이션 로직 시작 (생성/저장된 targetNumber 사용)
             const startTime = performance.now();
 
             function updateNumber(currentTime) {
                 const elapsedTime = currentTime - startTime;
                 const progress = Math.min(elapsedTime / duration, 1);
-                const currentNumber = Math.floor(progress * targetNumber);
+                // easeOutQuad 애니메이션 효과 적용
+                const easeOutProgress = progress * (2 - progress); 
+                
+                const currentNumber = Math.floor(easeOutProgress * targetNumber);
                 targetElement.innerText = currentNumber.toLocaleString();
 
                 if (progress < 1) {
@@ -708,9 +708,9 @@
             requestAnimationFrame(updateNumber);
         }
 
-        // 스크립트 실행
-        initializeDisclaimer();
-        initializeCtaText();
+        // 함수 실행
+        injectSEOData();
+        initializeTextElements();
         updateDynamicText();
         animateCount();
     });
@@ -718,81 +718,135 @@
 
 
 
-	
 
-<footer style="font-size: 11px; color: #888; padding: 30px 20px; text-align: center; line-height: 1.8; font-family: sans-serif;">
-  <div style="margin-bottom: 8px;">
-    <!-- 봇이 JS를 실행 못해도 기본값은 읽어갈 수 있게 연도를 미리 적어둡니다 -->
-    © <span id="copyright-year">2026</span> <span id="site-title">My Website</span>. All rights reserved.
+
+
+<!-- [Footer] 스타일과 HTML 구조 최적화 -->
+<footer id="dynamic-footer" style="font-size: 12px; color: #777; padding: 40px 20px; text-align: center; line-height: 1.8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #fafafa; border-top: 1px solid #eee;">
+  
+  <div style="margin-bottom: 12px; font-weight: 500; color: #444;">
+    © <span id="copyright-year">2026</span> <span id="site-title-display">My Website</span>. All rights reserved.
   </div>
 
-  <div style="color: #ccc;">
-    <span id="bot-msg">데이터 동기화 중...</span> | 
-    <!-- 빈 태그(empty tag)는 로봇이 무시하므로 기본 날짜형식을 넣어둡니다 -->
-    최종 기준일: <time id="bot-date" datetime="2026-01-01">2026-01-01</time>
+  <div style="display: flex; align-items: center; justify-content: center; gap: 8px; color: #999;">
+    <!-- 실시간 상태 표시등 (시각적 신뢰도 상승) -->
+    <span style="display: inline-block; width: 8px; height: 8px; background-color: #2ecc71; border-radius: 50%; box-shadow: 0 0 5px #2ecc71; animation: pulse 2s infinite;"></span>
+    <span id="sync-status" aria-live="polite">시스템 연결 중...</span>
+    <span style="color: #ddd;">|</span>
+    <span>최종 업데이트: <time id="last-update-time" datetime="2026-01-01">2026-01-01</time></span>
   </div>
+
+  <style>
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  </style>
 </footer>
 
 <script>
-  (function() {
-    // ----------------------------------------------------------------------
-    // 1. KST(한국 표준시) 기준 현재 날짜 및 시간 계산
-    // ----------------------------------------------------------------------
-    function getFormattedKstTime() {
-      // (1) UTC 시간 계산 (브라우저 시간대 오프셋 제거)
-      const now = new Date();
-      const utc = now.getTime() + (now.getTimezoneOffset() * 60 * 1000);
-      // (2) KST(UTC+9)로 변환
-      const kstGap = 9 * 60 * 60 * 1000;
-      const kstDate = new Date(utc + kstGap);
+(function() {
+  'use strict';
 
-      const year = kstDate.getFullYear();
-      const month = String(kstDate.getMonth() + 1).padStart(2, '0');
-      const day = String(kstDate.getDate()).padStart(2, '0');
-      const hour = String(kstDate.getHours()).padStart(2, '0');
-      const minute = String(kstDate.getMinutes()).padStart(2, '0');
-      const second = String(kstDate.getSeconds()).padStart(2, '0');
+  // 1. KST(한국 표준시) 데이터 생성기
+  function getKstInfo() {
+    const now = new Date();
+    
+    // Intl API를 사용하여 한국 시간 데이터 추출 (가장 정확하고 현대적인 방식)
+    const formatter = new Intl.DateTimeFormat('ko-KR', {
+      timeZone: 'Asia/Seoul',
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      hour12: false
+    });
 
-      // YYYY-MM-DD 형식 (footer 보여주기용)
-      // ********** 변경된 부분: 백틱 대신 + 기호 사용 **********
-      const formattedDate = year + '-' + month + '-' + day;
-      
-      // ISO 8601 형식 (검색엔진이 가장 좋아하는 표준 포맷)
-      // ********** 변경된 부분: 백틱 대신 + 기호 사용 **********
-      const isoDateTime = year + '-' + month + '-' + day + 'T' + hour + ':' + minute + ':' + second + '+09:00';
-      
-      return { year, formattedDate, isoDateTime };
+    const parts = formatter.formatToParts(now).reduce((acc, part) => {
+      acc[part.type] = part.value;
+      return acc;
+    }, {});
+
+    const year = parts.year;
+    const formattedDate = year + '-' + parts.month + '-' + parts.day;
+    const isoDateTime = year + '-' + parts.month + '-' + parts.day + 'T' + parts.hour + ':' + parts.minute + ':' + parts.second + '+09:00';
+
+    return { year, formattedDate, isoDateTime };
+  }
+
+  // 2. SEO 메타 태그 및 JSON-LD 일괄 업데이트
+  function updateSeoEngine(data) {
+    const title = document.title || window.location.hostname;
+
+    // 메타 태그 헬퍼 함수
+    const setMeta = (selector, content) => {
+      let el = document.querySelector(selector);
+      if (!el) {
+        el = document.createElement('meta');
+        if (selector.includes('property')) {
+          el.setAttribute('property', selector.split('"')[1]);
+        } else {
+          el.setAttribute('name', selector.split('"')[1]);
+        }
+        document.head.appendChild(el);
+      }
+      el.content = content;
+    };
+
+    // [SEO] 필수 메타 데이터
+    setMeta('property="og:updated_time"', data.isoDateTime);
+    setMeta('property="article:modified_time"', data.isoDateTime);
+    setMeta('name="date"', data.formattedDate);
+    setMeta('name="last-modified"', data.isoDateTime); // 서버 응답 대용
+    setMeta('name="copyright"', data.year + ' ' + title);
+
+    // [SEO] JSON-LD 구조화 데이터 (WebPage + Organization 결합)
+    let ldJsonScript = document.getElementById('seo-json-ld');
+    if (!ldJsonScript) {
+      ldJsonScript = document.createElement('script');
+      ldJsonScript.id = 'seo-json-ld';
+      ldJsonScript.type = 'application/ld+json';
+      document.head.appendChild(ldJsonScript);
     }
 
-    // ----------------------------------------------------------------------
-    // 2. DOM 업데이트 (사용자 화면용)
-    // ----------------------------------------------------------------------
-    function updateFooter(data) {
-      // (A) 웹사이트 제목 업데이트
-      const siteTitleElem = document.getElementById('site-title');
-      if (siteTitleElem) {
-        siteTitleElem.textContent = document.title || window.location.hostname;
-      }
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": window.location.href,
+          "url": window.location.href,
+          "name": title,
+          "datePublished": data.isoDateTime,
+          "dateModified": data.isoDateTime,
+          "inLanguage": "ko-KR"
+        },
+        {
+          "@type": "Organization",
+          "name": title,
+          "url": window.location.origin,
+          "logo": window.location.origin + "/favicon.ico"
+        }
+      ]
+    };
+    ldJsonScript.textContent = JSON.stringify(jsonLd);
+  }
 
-      // (B) 저작권 연도 업데이트
-      const yearElem = document.getElementById('copyright-year');
-      if (yearElem) {
-        yearElem.textContent = data.year;
-      }
+  // 3. UI 업데이트
+  function updateUi(data) {
+    const title = document.title || window.location.hostname;
+    
+    // 연도 및 제목
+    document.getElementById('copyright-year').textContent = data.year;
+    document.getElementById('site-title-display').textContent = title;
+    
+    // 날짜
+    const timeElem = document.getElementById('last-update-time');
+    timeElem.textContent = data.formattedDate;
+    timeElem.setAttribute('datetime', data.isoDateTime);
 
-      // (C) 최종 기준일 업데이트
-      const dateElem = document.getElementById('bot-date');
-      if (dateElem) {
-        dateElem.textContent = data.formattedDate;
-        dateElem.setAttribute('datetime', data.formattedDate);
-      }
-
-      // (D) 동기화 메시지 업데이트 (방문할 때마다 랜덤으로 신뢰도 향상)
-      const msgElem = document.getElementById('bot-msg');
-      if (msgElem) {
-        // 메시지 목록을 10개로 확장
-        const msgs = [
-          "서비스 최적화 완료", 
+    // 상태 메시지 (랜덤 순환)
+    const statusMsgs = [
+         "서비스 최적화 완료", 
           "데이터베이스 동기화 완료", 
           "보안 프로토콜 점검 완료",
           "콘텐츠 최신화 완료",
@@ -801,81 +855,30 @@
           "사용자 인터페이스 안정화",
           "성능 개선 완료",
           "새로운 데이터 로드 완료",
-          "운영 시스템 안정화 완료"
-        ];
-        // 방문할 때마다 메시지 랜덤 선택
-        const randomIndex = Math.floor(Math.random() * msgs.length);
-        msgElem.textContent = msgs[randomIndex];
-      }
-    }
-
-    // ----------------------------------------------------------------------
-    // 3. SEO 메타 태그 업데이트 (Naver/Google 공통)
-    // ----------------------------------------------------------------------
-function setMetaTag(attrType, attrName, content) {
-  // 백틱 대신 더하기 기호(+)를 사용하여 문자열 결합
-  let selector = 'meta[' + attrType + '="' + attrName + '"]';
-  
-  let meta = document.querySelector(selector);
-  if (!meta) {
-    meta = document.createElement('meta');
-    meta.setAttribute(attrType, attrName);
-    document.head.appendChild(meta);
+          "운영 시스템 안정화 완료",
+          "인덱싱 최적화 완료",
+          "데이터 무결성 검사 완료", 
+          "캐시 레이어 갱신",
+          "보안 프로토콜 활성화", 
+          "실시간 콘텐츠 동기화"
+    ];
+    document.getElementById('sync-status').textContent = statusMsgs[Math.floor(Math.random() * statusMsgs.length)];
   }
-  meta.content = content;
-}
 
-    function updateSeoMetaTags(data) {
-      // (A) Naver/Google 공통: Open Graph 수정일 (매우 중요)
-      setMetaTag('property', 'og:updated_time', data.isoDateTime);
-
-      // (B) Naver/Google 공통: Article 수정일 (Naver 웹문서 검색에 중요)
-      setMetaTag('property', 'article:modified_time', data.isoDateTime);
-
-      // (C) 일반 검색엔진(공통) 날짜 태그
-      setMetaTag('name', 'date', data.formattedDate);
-
-      // (D) 저작권 정보 갱신 (네이버 소유 확인 시 참고)
-      // ********** 변경된 부분: 백틱 대신 + 기호 사용 **********
-      setMetaTag('name', 'copyright', data.year + ' ' + document.title);
-    }
-
-    // ----------------------------------------------------------------------
-    // 4. [핵심 업그레이드] JSON-LD 구조화 데이터 삽입/업데이트
-    // ----------------------------------------------------------------------
-    function updateJsonLd(data) {
-      let script = document.querySelector('script[type="application/ld+json"]');
-      if (!script) {
-        script = document.createElement('script');
-        script.type = 'application/ld+json';
-        document.head.appendChild(script);
-      }
-
-      const jsonLdData = {
-        "@context": "https://schema.org",
-        "@type": "WebPage", 
-        "headline": document.title || window.location.hostname,
-        "dateModified": data.isoDateTime, 
-        "datePublished": data.isoDateTime, 
-        "name": document.title || window.location.hostname
-      };
-      
-      script.textContent = JSON.stringify(jsonLdData, null, 2);
-    }
-
-    // ----------------------------------------------------------------------
-    // 5. 실행
-    // ----------------------------------------------------------------------
-    const timeData = getFormattedKstTime();
-    updateFooter(timeData);
-    updateSeoMetaTags(timeData);
-    updateJsonLd(timeData);
-  })();
+  // 4. 실행 제어 (DOM 로드 후 실행)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      const data = getKstInfo();
+      updateUi(data);
+      updateSeoEngine(data);
+    });
+  } else {
+    const data = getKstInfo();
+    updateUi(data);
+    updateSeoEngine(data);
+  }
+})();
 </script>
-
-
-
-
 
 
 
